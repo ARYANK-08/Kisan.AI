@@ -1,6 +1,7 @@
 Kisan.ai offers a comprehensive solution to modernize farm management, enhancing efficiency, profitability, and sustainability. It integrates various technologies to address key areas in agriculture, making tasks easier and safer for farmers. Here's how it revolutionizes farming:
 
 INTERNATIONAL LEVEL HACKATHON WINNING PROJECT :D
+Details :  https://www.linkedin.com/posts/aryankyatham_we-won-the-google-international-level-hackathon-activity-7167872040169861120-soVz?utm_source=share&utm_medium=member_desktop
 
 Link : https://devfolio.co/projects/kisanai-499c
  
