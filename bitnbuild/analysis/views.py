@@ -9,9 +9,9 @@ def season(request):
     return render(request, 'pages/season.html')
     
 def send_report_via_sms():
-    account_sid = 'AC8ff1c391e4daaab4fd0a0d0faa4bab65'
+    account_sid = 'your twilio account sid'
 
-    auth_token = '6788fb86455a09456a2be591a4165109'
+    auth_token = 'your auth token'
     client = Client(account_sid, auth_token)
 
     message = client.messages.create(
