@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <style>
+    .order-summary {
+      text-align: center;
+      margin: 2rem;
+    }
+
+    .order-card {
+      width: 30rem;
+      margin: auto;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-body {
+      padding: 1.5rem;
+    }
+
+    .card-text {
+      margin-bottom: 0.5rem;
+    }
+
+    button {
+      display: block;
+      margin: auto;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+
+  <div class="order-summary">
+    <h1>Order Summary</h1>
+
+    <div class="order-card">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Order Summary</h5>
+
+          {% for resource, quantity in resources.items %}
+            <p class="card-text"><b>Resource:</b> {{ resource }} | <b>Quantity:</b> {{ quantity }}</p>
+          {% endfor %}
+
+          <p class="card-text"><b>Total Resources Ordered:</b> {{ resources|length }}</p>
+        </div>
+      </div>
+    </div>
+<br>
+    <a href='/products' button class="btn btn-primary">Proceed to Checkout</button></a>
+  </div>
+{% endblock %}

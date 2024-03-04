@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Seasonal analysis
+{% endblock title %}
+{% block content %}
+
+
+<div class="card">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      max-width: 800px; /* Limit container width */
+      margin: 0 auto; /* Center container */
+      padding-top: 20px;
+    }
+    .column {
+      flex-basis: 45%; /* Adjust based on your preference */
+      margin: 10px;
+    }
+    .chart-container {
+      margin-bottom: 20px;
+    }
+  </style>
+
+  <center><h1>Seasonal Analysis</h1></center>
+  <div class="container">
+
+    <div class="column">
+      <div class="chart-container">
+        <canvas id="winter-chart" width="300" height="200"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="spring-chart" width="300" height="200"></canvas>
+      </div>
+    </div>
+    <div class="column">
+      <div class="chart-container">
+        <canvas id="summer-chart" width="300" height="200"></canvas>
+      </div>
+      <div class="chart-container">
+        <canvas id="autumn-chart" width="300" height="200"></canvas>
+      </div>
+    </div>
+    <center>
+        <a button class="btn btn-primary" type="button" href="/crops" >Crops</a>
+        <a button class="btn btn-primary" type="button" href="/fertilizer" >Fertilizers</a>
+        <a button class="btn btn-primary" type="button" href="/seed" >Seeds</a>
+        <a button class="btn btn-primary" type="button" href="/utilized" >Utilization%</a>
+
+    
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var seasonalData = {
+        "Winter": {
+          "top_products": {
+            "Wheat": 3100,
+            "Barley": 1500,
+            "Mustard": 865
+          }
+        },
+        "Spring": {
+          "top_products": {
+            "Rice": 1000,
+            "Maize": 3200,
+            "Soybean": 1200
+          }
+        },
+        "Summer": {
+          "top_products": {
+            "Paddy": 3300,
+            "Wheat": 1200,
+            "Mustard": 2371
+          }
+        },
+        "Autumn": {
+          "top_products": {
+            "Rice": 1600,
+            "Barley": 2200,
+            "Wheat": 3200
+          }
+        }
+      };
+
+      function renderBarChart(data, canvasId, title) {
+        var ctx = document.getElementById(canvasId).getContext('2d');
+        var labels = Object.keys(data);
+        var values = Object.values(data);
+        var chartData = {
+          labels: labels,
+          datasets: [{
+            label: title,
+            data: values,
+            backgroundColor: ['#5e72e4', '#9b02fa', '#6902fa']
+          }]
+        };
+        var chartOptions = {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true
+              }
+            }]
+          }
+        };
+        var barChart = new Chart(ctx, {
+          type: 'bar',
+          data: chartData,
+          options: chartOptions
+        });
+      }
+
+      renderBarChart(seasonalData.Winter.top_products, 'winter-chart', 'Top Crops (Winter)');
+      renderBarChart(seasonalData.Spring.top_products, 'spring-chart', 'Top Crops (Spring)');
+      renderBarChart(seasonalData.Summer.top_products, 'summer-chart', 'Top Crops (Summer)');
+      renderBarChart(seasonalData.Autumn.top_products, 'autumn-chart', 'Top Crops (Autumn)');
+    });
+  </script>
+</body>
+</html> 
+
+{% endblock %}

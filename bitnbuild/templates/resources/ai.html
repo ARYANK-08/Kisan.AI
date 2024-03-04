@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 20px;
+    }
+
+    #minecraftForm {
+        max-width: 400px;
+        margin: 0 auto;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s;
+    }
+
+    input:focus, select:focus {
+        border-color: #4caf50;
+    }
+
+    button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #45a049;
+    }
+
+    /* Responsive styling */
+    @media (max-width: 600px) {
+        #minecraftForm {
+            width: 90%;
+        }
+
+        input, select {
+            width: 100%;
+        }
+    }
+
+    /* Additional styles for the header image */
+    .page-header {
+        background-size: cover;
+        background-position: center;
+        height: 300px;
+        position: relative;
+    }
+
+    .mask {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .avatar {
+        width: 100px;
+        height: 100px;
+    }
+    #exampleImage {
+        display: none;
+        position: absolute;
+        top: 30px;
+        left: 0;
+        padding: 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="container-fluid px-2 px-md-4">
+    <div class="page-header min-height-300 border-radius-xl mt-4"
+        style="background-image: url('https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');">
+        <span class="mask bg-gradient-primary opacity-6"></span>
+    </div>
+
+    <div class="card card-body mx-3 mx-md-4 mt-n6">
+        <div class="row gx-4 mb-2">
+            <div class="col-auto">
+                <div class="avatar avatar-xl position-relative">
+                    <img src="{% static 'assets/img/bruce-mars.jpg' %}" alt="profile_image"
+                        class="w-100 border-radius-lg shadow-sm">
+                </div>
+            </div>
+
+            <form method="post" id="farmerForm">
+                {% csrf_token %}
+                <label for="cropType">Crop Type:</label>
+                <input type="text" id="cropType" name="cropType" required>
+
+                <label for="landArea">Land Area (in sq. meters):</label>
+                <input type="number" id="landArea" name="landArea" required>
+                
+                <label for="soilquality">Soil Quality:</label>
+                <select id="soilquality" name="soilquality" required>
+                    <option value="sandy">Sandy</option>
+                    <option value="clay">Clay</option>
+                    <option value="loam">Loam</option>
+                    <option value="slit">Slit</option>
+                </select>
+
+                <div class="position-relative" >
+                    <img src="{% static 'assets/img/soil.png' %}" alt="profile_image"
+                        class="w-70 border-radius-lg shadow-sm">
+                </div>
+                <br>
+               
+
+                <label for="season">Planting Season:</label>
+                <select id="season" name="season" required>
+                    <option value="summer">Summer</option>
+                    <option value="spring">Spring</option>
+                    <option value="autumn">Autumn</option>
+                    <option value="winter">Winter</option>
+                </select>
+
+                <br>
+
+                <button class="btn bg-gradient-primary cursor-pointer" type="submit">Send</button>
+            </form>
+
+            {% if response %}
+            <div id="aiResponse" class="mt-4">
+                <h2 class="text-primary">AI Response:</h2>
+                <pre class="text-dark">{{ response }}</pre>
+            </div>
+
+            <a href="/order"><button class="btn bg-gradient-primary cursor-pointer" >Send</button></a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript code to toggle visibility based on the selected input type
+    document.addEventListener('DOMContentLoaded', function () {
+        const responseText = document.getElementById('responseText');
+        if (responseText) {
+            responseText.innerHTML = responseText.innerHTML.replace(/\\/g, '<br>*');
+        }
+
+        // Responsive toggle for input fields
+        const landAreaInput = document.getElementById('landArea');
+        const cropTypeInput = document.getElementById('cropType');
+        const seasonInput = document.getElementById('season');
+
+        const setInputsWidth = () => {
+            const windowWidth = window.innerWidth;
+            if (windowWidth <= 600) {
+                landAreaInput.style.width = '100%';
+                cropTypeInput.style.width = '100%';
+                seasonInput.style.width = '100%';
+            } else {
+                landAreaInput.style.width = 'calc(50% - 10px)';
+                cropTypeInput.style.width = 'calc(50% - 10px)';
+                seasonInput.style.width = 'calc(50% - 10px)';
+            }
+        };
+
+        setInputsWidth();
+
+        window.addEventListener('resize', setInputsWidth);
+    });
+</script>
+{% endblock %}

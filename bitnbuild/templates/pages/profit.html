@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Seasonal analysis
+{% endblock title %}
+{% block content %}
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Doughnut Chart Example</title>
+<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+  .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 50px;
+  }
+  .chart-container {
+    flex: 1;
+    max-width: 33%;
+    padding: 0 15px;
+  }
+</style>
+</head>
+<body>
+<div>
+    <center>
+    <h1>Profit  Analysis</h1>
+</div>
+  <div class="container">
+    <div class="chart-container">
+        <h2 class="text-center mb-3">Fertilizers</h2>
+        <div class="card shadow-xs border mb-4">
+      <div class="card-body p-3">
+        <div class="chart">
+          <canvas id="chart-left" class="chart-canvas" height="400px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="chart-container">
+    <h2 class="text-center mb-3">Crops</h2>
+    <div class="card shadow-xs border mb-4">
+      <div class="card-body p-3">
+        <div class="chart">
+          <canvas id="chart-doughnut" class="chart-canvas" height="400px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="chart-container">
+    <h2 class="text-center mb-3">Seeds</h2>
+    <div class="card shadow-xs border mb-4">
+      <div class="card-body p-3">
+        <div class="chart">
+          <canvas id="chart-right" class="chart-canvas" height="400px"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// JavaScript code to initialize Chart.js doughnut chart
+var ctxDoughnut = document.getElementById("chart-doughnut").getContext("2d");
+
+new Chart(ctxDoughnut, {
+  type: "doughnut",
+  data: {
+    labels: ["Rice", "Wheat", "Sugarcane", "Barley"],
+    datasets: [{
+      label: "Wallet",
+      cutout: 40,
+      backgroundColor: ["#2525cc", "#1818f0", "#1b1ba8", "#0a0a69"],
+      data: [450, 200, 100, 220],
+      maxBarThickness: 6
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      },
+      tooltip: {
+        callbacks: {
+          label: function(context) {
+            var label = context.label || '';
+            if (label) {
+              label += ': ';
+            }
+            label += context.dataset.data[context.dataIndex] + ' ' + context.chart.data.labels[context.dataIndex];
+            return label;
+          }
+        },
+        backgroundColor: '#fff',
+        bodyColor: '#1e293b',
+        borderColor: '#e9ecef',
+        borderWidth: 1,
+        usePointStyle: true
+      }
+    },
+    interaction: {
+      intersect: false,
+      mode: 'index',
+    },
+    scales: {
+      y: {
+        grid: {
+          drawBorder: false,
+          display: false,
+          drawOnChartArea: false,
+          drawTicks: false,
+        },
+        ticks: {
+          display: false
+        }
+      },
+      x: {
+        grid: {
+          drawBorder: false,
+          display: false,
+          drawOnChartArea: false,
+          drawTicks: false
+        },
+        ticks: {
+          display: false
+        }
+      }
+    }
+  }
+});
+
+// JavaScript code to initialize Chart.js for the left chart
+var ctxLeft = document.getElementById("chart-left").getContext("2d");
+
+new Chart(ctxLeft, {
+  type: "bar",
+  data: {
+    labels: ["DAP", "Potassium Sulphate", "Urea","MOP","SSP","Diammonium","Potassium"],
+    datasets: [{
+      label: "Left Chart",
+      backgroundColor: ["#0000fc", "#1010cc", "#030385","#4949eb","#2828fa","#0d0db8","#212180"],
+      data: [100, 50, 150,25,75,200,125],
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+
+// JavaScript code to initialize Chart.js for the right chart
+var ctxRight = document.getElementById("chart-right").getContext("2d");
+
+new Chart(ctxRight, {
+  type: "line",
+  data: {
+    labels: ["Soybean", "Maize", "Paddy", "Mustard","Rice","Barley","Wheat"],
+    datasets: [{
+      label: "Right Chart",
+      borderColor: "#1c1cba",
+      data: [100,50 ,200, 75,125,150,100],
+      fill: false
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false,
+      }
+    },
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
+
+{% endblock %}
+
+
+

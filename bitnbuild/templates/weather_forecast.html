@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Weather Forecast {% endblock title %}
+{% block content %}
+<div class="container my-5">
+    <h1 class="mb-4">Weather Forecast</h1>
+  
+    <!-- Forecast Section -->
+    <h2 class="mb-3">Forecast</h2>
+  
+    <!-- Forecast Cards Row -->
+    <div class="row mb-4">
+      <!-- Next 1 Day -->
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow">
+          <div class="card-img-overlay">
+            <h3 class="card-title text-white">Next 1 Day</h3>
+          </div>
+          <img src="{% static 'assets/img/dayone.jpg' %}" class="card-img-top img-fluid" alt="...">
+          <div class="card-body">
+            <p>Date: {{ sample_next_1_day.date }}</p>
+            <p>Rainfall Prediction: {{ sample_next_1_day.rainfall_prediction }}%</p>
+            <!-- Progress bars and other details -->
+            <div class="progress-wrapper">
+                <div class="progress-info">
+                  <div class="progress-percentage">
+                    <span class="text-sm font-weight-bold">30%</span>
+                  </div>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 30%;"></div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+          
+  
+      <!-- Next 1 Week -->
+      <div class="col-md-6">
+        <div class="card h-100 border-0 shadow">
+          <div class="card-img-overlay">
+            <h3 class="card-title text-white">Next 1 Week</h3>
+          </div>
+          <img src="{% static 'assets/img/weekone.jpg' %}" class="card-img-top img-fluid" alt="...">
+          <div class="card-body">
+            <p>Date Range: {{ sample_next_1_week.date_range }}</p>
+            <p>Average Rainfall Prediction: {{ sample_next_1_week.average_rainfall_prediction }}%</p>
+            <!-- Progress bars and other details -->
+            <div class="progress-wrapper">
+                <div class="progress-info">
+                  <div class="progress-percentage">
+                    <span class="text-sm font-weight-bold">25%</span>
+                  </div>
+                </div>
+                <div class="progress">
+                  <div class="progress-bar bg-success" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width: 25%;"></div>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+</div>
+<center>
+      <div class="container">
+        <div class="row">
+            <!-- Additional Information for Farmers -->
+            <div class="col-md-8 mx-auto">
+                <div class="card border-0 shadow" style="max-width: 600px;">
+                    <div class="card-body text-center">
+                        <h2 class="card-title">Additional Information for Farmers</h2>
+                        <p>1. {{ additional_info.soil_moisture_levels }}</p>
+                        <p>2. {{ additional_info.crop_planning }}</p>
+                        <p>3. {{ additional_info.pest_management }}</p>
+                        <p>4. {{ additional_info.water_management }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Get Weather -->
+            <div class="col-md-8 mx-auto">
+                <div class="card border-0 shadow" style="max-width: 600px;">
+                    <div class="card-body text-center">
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <div class="form-group mb-3">
+                                <input type="text" class="form-control form-control-sm" name="city" placeholder="City Name" required>
+                            </div>
+                            <button class="btn btn-dark btn-sm" type="submit">Get Weather</button>
+                        </form>
+                        {% if weather_data %}
+                            {% if weather_data.error %}
+                                <p class="text-danger mt-3">{{ weather_data.error }}</p>
+                            {% else %}
+                                <h2 class="mt-3">Weather in {{ weather_data.city }}</h2>
+                                <p>Temperature: {{ weather_data.temperature }}°C</p>
+                                <p>Description: {{ weather_data.description }}</p>
+                                <img src="http://openweathermap.org/img/wn/{{ weather_data.icon }}@2x.png" alt="Weather icon">
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+      
+{% endblock content %}

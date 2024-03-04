@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% block title %} Add Inventory {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Add Product</div>
+
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- Product Name -->
+                        <div class="form-group">
+                            <label for="id_name">Product Name</label>
+                            <input class="form-control" type="text" name="name" id="id_name">
+                        </div>
+
+                        <!-- Image Input -->
+                        <div class="form-group">
+                            <label for="id_image">Image</label>
+                            <input class="btn btn-primary" type="file" name="image" id="id_image">
+                        </div>
+
+                        <!-- Price Input -->
+                        <div class="form-group">
+                            <label for="id_price">Price</label>
+                            <input class="form-control" type="number" step="0.01" name="price" id="id_price">
+                        </div>
+
+                        <!-- Quantity Total Input -->
+                        <div class="form-group">
+                            <label for="id_quantity_total">Total Quantity</label>
+                            <input class="form-control" type="number" name="quantity_total" id="id_quantity_total">
+                        </div>
+
+                        <!-- Date Bought Input -->
+                        <div class="form-group">
+                            <label for="id_date_bought">Date Bought</label>
+                            <input class="form-control" type="date" name="date_bought" id="id_date_bought">
+                        </div>
+
+                        <!-- Date Expiration Input -->
+                        <div class="form-group">
+                            <label for="id_date_expiration">Date Expiration</label>
+                            <input class="form-control" type="date" name="date_expiration" id="id_date_expiration">
+                        </div>
+
+                        <!-- Category Input -->
+                        <div class="form-group">
+                            <label for="id_category">Category</label>
+                            <select class="form-control" name="category" id="id_category">
+                                <option value="">Select a Category</option>
+                                {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Quantity Remaining Input -->
+                        <div class="form-group">
+                            <label for="id_quantity_remaining">Quantity Remaining</label>
+                            <input class="form-control" type="number" name="quantity_remaining" id="id_quantity_remaining">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+z

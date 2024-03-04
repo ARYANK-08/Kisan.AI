@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+Seasonal analysis
+{% endblock title %}
+{% block content %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bar Chart Example</title>
+<!-- Include Chart.js library -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<!-- First Bar Chart -->
+<div class="card mb-3">
+  <div class="card-body p-3">
+    <center>
+    <h1>Crop Utilization%</h1>
+    <div class="chart">
+      <canvas id="bar-chart-1" class="chart-canvas" height="300px"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Second Bar Chart -->
+<div class="card mb-3">
+  <div class="card-body p-3">
+    <center>
+    <h1> Fertilizer Utilization%</h1>
+    <div class="chart">
+      <canvas id="bar-chart-2" class="chart-canvas" height="300px"></canvas>
+    </div>
+  </div>
+</div>
+
+<!-- Third Bar Chart -->
+<div class="card mb-3">
+  <div class="card-body p-3">
+    <center>
+    <h1>Seed Utilization%</h1>
+    <div class="chart">
+      <canvas id="bar-chart-3" class="chart-canvas" height="300px"></canvas>
+    </div>
+  </div>
+</div>
+<div>
+  <center>
+  <a button class="btn btn-primary" type="button" href="/profit" >Profit%</a>
+
+</div>
+
+
+<script>
+// JavaScript code to initialize Chart.js bar charts
+
+// First Bar Chart
+var ctx1 = document.getElementById("bar-chart-1").getContext("2d");
+new Chart(ctx1, {
+  type: "bar",
+  data: {
+    labels: ["Wheat",  "Cotton", "Soybean", "Barley", "Rice", "Sugarcane"],
+    datasets: [{
+      backgroundColor: ["#0000fc", "#030385","#4949eb","#2828fa","#0d0db8","#212180"],
+      data: [50, 30,20,60,40,100,80],
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false 
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        grid: {
+          display: false
+        },
+        ticks: {
+          callback: function(value, index, values) {
+            return value + '%';
+          }
+        }
+      }
+    }
+  }
+});
+
+// Second Bar Chart
+var ctx2 = document.getElementById("bar-chart-2").getContext("2d");
+new Chart(ctx2, {
+  type: "bar",
+  data: {
+    labels: ["Potassium Sulphate", "Urea", "MOP", "Potassium", "Diammonium", "DAP"],
+    datasets: [{
+      backgroundColor: ["#0000fc", "#030385","#4949eb","#2828fa","#0d0db8","#212180"],
+      data: [30, 40,50,70,20,90,60],
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false 
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        grid: {
+          display: false
+        },
+        ticks: {
+          callback: function(value, index, values) {
+            return value + '%';
+          }
+        }
+      }
+    }
+  }
+});
+
+// Third Bar Chart
+var ctx3 = document.getElementById("bar-chart-3").getContext("2d");
+new Chart(ctx3, {
+  type: "bar",
+  data: {
+    labels: ["Paddy",  "Wheat", "Soybean", "Barley", "Maize", "Paddy"],
+    datasets: [{
+      backgroundColor: ["#0000fc",  "#030385","#4949eb","#2828fa","#0d0db8","#212180"],
+      data: [80, 60,70,50,90,30,40],
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false 
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        grid: {
+          display: false
+        },
+        ticks: {
+          callback: function(value, index, values) {
+            return value + '%';
+          }
+        }
+      }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
+
+{% endblock %}

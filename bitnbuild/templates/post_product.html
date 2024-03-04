@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block title %} Post Product {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Add Product</div>
+
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <!-- Product Name -->
+                        <div class="form-group">
+                            <label for="id_name">Product Name</label>
+                            <input class="form-control" type="text" name="name" id="id_name">
+                        </div>
+
+                        <!-- Category Input -->
+                        <div class="form-group">
+                            <label for="id_category">Category</label>
+                            <select class="form-control" name="category" id="id_category">
+                                <option value="vegetable">vegetable</option>
+                                <option value="farming tools">farming tools</option>
+                                <option value="fruits">fruits</option>
+                            </select>
+                        </div>
+                        
+
+                        <!-- Image Input -->
+                        <div class="form-group">
+                            <label for="id_image">Image</label>
+                            <input class="btn btn-primary" type="file" name="image" id="id_image">
+                        </div>
+
+                        <!-- Description Input -->
+                        <div class="form-group">
+                            <label for="id_description">Description</label>
+                            <textarea class="form-control" name="description" id="id_description"></textarea>
+                        </div>
+
+                        <!-- Farmer Name Input -->
+                        <div class="form-group">
+                            <label for="id_farmer_name">Farmer Name</label>
+                            <input class="form-control" type="text" name="farmer_name" id="id_farmer_name">
+                        </div>
+
+                        <!-- Farmer Contact Input -->
+                        <div class="form-group">
+                            <label for="id_farmer_contact">Farmer Contact</label>
+                            <input class="form-control" type="text" name="farmer_contact" id="id_farmer_contact">
+                        </div>
+
+                        <!-- Date of Posting Input -->
+                        <div class="form-group">
+                            <label for="id_date_of_posting">Date of Posting</label>
+                            <input class="form-control" type="date" name="date_of_posting" id="id_date_of_posting">
+                        </div>
+
+                        <!-- Location Input -->
+                        <div class="form-group">
+                            <label for="id_location">Location</label>
+                            <input class="form-control" type="text" name="location" id="id_location">
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Post Product</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

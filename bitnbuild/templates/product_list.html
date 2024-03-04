@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h2 class="text-center mb-4">welcome to traders marketplace, select a category to browse postings</h2>
+<div class="dropdown">
+    <a href="javascript:;" class="btn bg-gradient-dark dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
+        <img src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/icons/flags/US.png" /> categories
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+        <li>
+            <a class="dropdown-item category" href="javascript:;" id="vegetable">
+              <img src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/icons/flags/DE.png" /> vegetables
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item category" href="javascript:;" id="farming tools">
+              <img src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/icons/flags/GB.png" /> farming tools
+            </a>
+        </li>
+        <li>
+            <a class="dropdown-item category" href="javascript:;" id="fruits">
+              <img src="https://demos.creative-tim.com/argon-dashboard-pro/assets/img/icons/flags/FR.png" /> fruits
+            </a>
+        </li>
+    </ul>
+</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h3 class="text-center mb-4">traders marketplace</h3>
+            {% for product in products %}
+            <div class="card mb-4 product-item" data-category="{{ product.category }}" style="display: none;">
+                <!-- Card image -->
+                <div class="card-header p-0 mx-3 mt-3 position-relative z-index-1">
+                    <img class="border-radius-lg w-100" src="{{ product.image.url }}" alt="{{ product.name }}">
+                </div>
+                <!-- Card body -->
+                <div class="card-body">
+                    <h3 class="card-title mb-3">{{ product.name }}</h3>
+                    <p class="card-text mb-2">{{ product.description }}</p>
+                    <ul class="list-group list-group-flush mt-2">
+                        <li class="list-group-item"><strong>Category:</strong> {{ product.category }}</li>
+                        <li class="list-group-item"><strong>Farmer name:</strong> {{ product.farmer_name }}</li>
+                        <li class="list-group-item"><strong>Farmer Contact:</strong> {{ product.farmer_contact }}</li>
+                        <li class="list-group-item"><strong>date_of_posting:</strong> {{ product.date_of_posting }}</li>
+                        <li class="list-group-item"><strong>location:</strong> {{ product.location }}</li>
+                    </ul>
+                    <a href="{% url 'bids_page' %}" class="btn btn-dark mt-3">market price and local bids</a>
+
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No products available</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelectorAll('.category').forEach(item => {
+        item.addEventListener('click', event => {
+            const selectedCategory = event.target.id;
+            document.querySelectorAll('.product-item').forEach(product => {
+                if (selectedCategory === 'all' || product.dataset.category === selectedCategory) {
+                    product.style.display = 'block';
+                } else {
+                    product.style.display = 'none';
+                }
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}
