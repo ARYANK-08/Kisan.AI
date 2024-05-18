@@ -364,23 +364,74 @@ def user_input(user_question):
         response_text = "It seems that the answer is out of context. Here is a general response: ..."
     return response_text
 
+# def gemini(request):
+#     if request.method == 'POST':
+#         # Handle PDF upload
+#         pdf_docs = request.FILES.getlist('pdf_files')
+#         raw_text = get_pdf_text(pdf_docs)
+#         text_chunks = get_text_chunks(raw_text)
+#         pdf_path = get_vector_store(text_chunks)  # Save the PDF path
+
+#         # Store the PDF path in the user's session
+#         request.session['pdf_path'] = pdf_path
+
+#         # Handle user question
+#         user_question = request.POST.get('user_question')
+#         response_text = user_input(user_question)
+
+
+#         # Return response
+#         return render(request, 'pages/gemini.html', {'response_text': response_text})
+#     else:
+#         return render(request, 'pages/gemini.html')
+
+import fitz
+import os
+import tempfile
+import pathlib
+import json
+import google.ai.generativelanguage as glm
+import google.generativeai as genai
+
+def conv(pdf_path):
+    doc = fitz.open(pdf_path)
+
+    # Initialize an empty string to store the concatenated text
+    extracted_text = ""
+
+    # Loop through each page of the PDF file
+    for page in doc:
+        # Extract the text from the page
+        text = page.get_text()
+
+        # Add the extracted text to the concatenated text
+        extracted_text += text
+
+    # Close the PDF file
+    doc.close()
+
+    return extracted_text
+
 def gemini(request):
     if request.method == 'POST':
         # Handle PDF upload
-        pdf_docs = request.FILES.getlist('pdf_files')
-        raw_text = get_pdf_text(pdf_docs)
-        text_chunks = get_text_chunks(raw_text)
-        pdf_path = get_vector_store(text_chunks)  # Save the PDF path
-
-        # Store the PDF path in the user's session
-        request.session['pdf_path'] = pdf_path
-
-        # Handle user question
+        pdf_docs = request.FILES.get('pdf_files')
+        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            for chunk in pdf_docs.chunks():
+                temp_file.write(chunk)
+            pdf_docs = temp_file.name
+        text=conv(pdf_docs)
         user_question = request.POST.get('user_question')
-        response_text = user_input(user_question)
+        api_key ="AIzaSyCO_iR3zrQIuFbsy_wGyFOOfhaXr38Ogjc"
+        genai.configure(api_key=api_key)
+        model = genai.GenerativeModel('gemini-pro')
+        response = model.generate_content(f"FROM THE {text} answer the {user_question} and add your insights")
+        for chunk in response:
+    # Handle the response chunk
+            print(chunk)
+#    Extracting the text from the response
+        out_text = response._result.candidates[0].content.parts[0].text
 
-
-        # Return response
-        return render(request, 'pages/gemini.html', {'response_text': response_text})
+        return render(request, 'pages/gemini.html', {'response_text': out_text})
     else:
         return render(request, 'pages/gemini.html')
