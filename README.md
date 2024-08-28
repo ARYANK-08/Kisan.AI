@@ -1,10 +1,32 @@
-Kisan.ai offers a comprehensive solution to modernize farm management, enhancing efficiency, profitability, and sustainability. It integrates various technologies to address key areas in agriculture, making tasks easier and safer for farmers. Here's how it revolutionizes farming:
+# 🌾 Kisan.ai
 
-INTERNATIONAL LEVEL HACKATHON WINNING PROJECT :D
-Details :  https://www.linkedin.com/posts/aryankyatham_we-won-the-google-international-level-hackathon-activity-7167872040169861120-soVz?utm_source=share&utm_medium=member_desktop
+**Revolutionizing Farm Management with Technology**  
+*Kisan.ai* is an award-winning project that modernizes farming by integrating AI, AR, and real-time updates, making agriculture more efficient, profitable, and sustainable.
 
-Link : https://devfolio.co/projects/kisanai-499c
- 
+## 🌟 Key Features
+
+- **📦 Inventory Management**: Real-time tracking to prevent overstocking and understocking.
+- **⏰ Expiration Tracking**: Automatic alerts for perishable goods.
+- **📲 Real-Time Alerts**: Stock notifications via SMS/WhatsApp.
+- **🤖 AI Resource Estimation**: Optimize resources based on soil, season, and crop needs.
+- **📈 Market Insights**: Current prices and trader contacts for informed selling.
+- **🌦️ Weather Forecasting**: Tailored forecasts for better planning.
+- **🛠️ Automated Tool Crafting**: Simplified creation of tools from available resources.
+- **🕶️ AR Visualization**: Manage inventory with 3D AR models.
+
+## 🔗 Links
+- [Project](https://devfolio.co/projects/kisanai-499c)
+- [Hackathon Win Announcement](https://www.linkedin.com/posts/aryankyatham_we-won-the-google-international-level-hackathon-activity-7167872040169861120-soVz)
+
+## 👥 Developers
+- Aryan Kyatham
+- Sharvin Gavad
+- Myron Dabreo
+- Neston Cabral
+
+## 🛠️ Technologies Used
+- Django | AI & ML | AR | SMS/WhatsApp API
+
 ![Screenshot 2024-03-04 163221](https://github.com/ARYANK-08/KISANInv.AI/assets/120780784/fcabdaa5-184a-4d11-b9d0-01dd90a68b0e)
 
 ![MixCollage-04-Mar-2024-04-59-PM-7716](https://github.com/ARYANK-08/KISANInv.AI/assets/120780784/4a0c863c-57c3-4e2c-951e-c0913c18cd22)
@@ -18,25 +40,6 @@ Link : https://devfolio.co/projects/kisanai-499c
 ![Screenshot 2024-03-04 163633](https://github.com/ARYANK-08/KISANInv.AI/assets/120780784/3ad2a2a2-86b0-4967-a8ab-730713efcf96)
 
 ![Screenshot 2024-03-04 163838](https://github.com/ARYANK-08/KISANInv.AI/assets/120780784/9fcc0f4f-c94f-4eaf-80bd-3eb81c18021c)
-
-Features:
-- Inventory Management: Simplifies tracking of seeds, tools, and produce, ensuring real-time visibility and preventing wastage through overstocking or understocking.
-
-- Expiration Tracking: Automatically monitors perishable goods' expiration dates to reduce losses and ensure food safety by prompting timely action.
-
-- Real-Time Updates and Alerts: Utilizes SMS and WhatsApp for instant stock level notifications, enabling quick replenishment to avoid stockouts.
-
-- Resource Estimation with AI: Employs AI for precise resource allocation based on soil type, season, and crop needs, optimizing crop growth conditions and reducing unnecessary expenses.
-
-- Market Price Insights and Trader Contacts: Provides current market prices and trader contacts, empowering farmers to make informed selling decisions at optimal prices.
-
-- Profit and Utilization Analysis: Analyzes sales data to highlight profitable crops and resource utilization, guiding future strategies for increased profitability.
-
-- Weather Forecasting: Offers tailored weather forecasts, including temperature and rainfall predictions, allowing for better agricultural planning and risk mitigation.
-
-- Automated Tool Crafting: Simplifies tool creation from available resources, saving time and reducing the need for external purchases.
-
-- Augmented Reality (AR) Inventory Visualization: Enhances inventory management through AR for a 3D visualization, making it easier to manage and organize.
 
 Interactive Data Queries: Allows for quick, conversational access to specific inventory information, eliminating manual search efforts.
 
